@@ -3,8 +3,9 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap.h"
-#include "features/custom_shift_key.h"
+// #include "features/custom_shift_key.h"
 #include "keymap_us_international.h"
+#include "sendstring_us_international.h"
 
 
 enum layers {
@@ -14,69 +15,76 @@ enum layers {
     _SYM
 };
 
+// [_COLEMAK] = LAYOUT_split_3x6_3(
+//   RALT(US_6)     , KC_Q         , KC_W         , KC_F         , KC_P         , KC_B             ,                                            KC_J               , KC_L         , KC_U         , KC_Y         , KC_QUOTE     , KC_DEL ,
+//   RALT(KC_GRAVE) , LALT_T(KC_A) , LGUI_T(KC_R) , LCTL_T(KC_S) , LSFT_T(KC_T) , KC_G             ,                                            KC_M               , LSFT_T(KC_N) , LCTL_T(KC_E) , LGUI_T(KC_I) , LALT_T(KC_O) , KC_BSPC,
+//   ___            , KC_Z         , KC_X         , KC_C         , KC_D         , KC_V             ,                                            KC_K               , KC_H         , KC_COMM      , KC_DOT       , KC_QUESTION  , ___    ,
+//                                                                 KC_RALT      , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
+// ),
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//    ┌────────────┬───────────┬───────────┬───────────┬───────────────┬───────────────┐                                       ┌───────────────┬───────────┬───────────┬───────────┬───────────┬──────┐
-//    │ RALT(US_6) │     q     │     w     │     f     │       p       │       b       │                                       │       j       │     l     │     u     │     y     │    "'"    │ ___  │
-//    ├────────────┼───────────┼───────────┼───────────┼───────────────┼───────────────┤                                       ├───────────────┼───────────┼───────────┼───────────┼───────────┼──────┤
-//    │  RALT(`)   │ LALT_T(a) │ LGUI_T(r) │ LCTL_T(s) │   LSFT_T(t)   │       g       │                                       │       m       │ LSFT_T(n) │ LCTL_T(e) │ LGUI_T(i) │ LALT_T(o) │ bspc │
-//    ├────────────┼───────────┼───────────┼───────────┼───────────────┼───────────────┤                                       ├───────────────┼───────────┼───────────┼───────────┼───────────┼──────┤
-//    │    ___     │     z     │     x     │     c     │       d       │       v       │                                       │       k       │     h     │     ,     │     .     │     ?     │ ___  │
-//    └────────────┴───────────┴───────────┴───────────┼───────────────┼───────────────┼───────────────┐       ┌───────────────┼───────────────┼───────────┼───────────┴───────────┴───────────┴──────┘
-//                                                     │ OSM(MOD_RALT) │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ LT(_NUM, tab) │ LT(_SYM, ent) │    esc    │
-//                                                     └───────────────┴───────────────┴───────────────┘       └───────────────┴───────────────┴───────────┘
+//    ┌────────────┬───────────┬───────────┬───────────┬───────────┬───────────────┐                                       ┌───────────────┬───────────┬───────────┬───────────┬───────────┬──────┐
+//    │ RALT(US_6) │     w     │     l     │     y     │     p     │       b       │                                       │       z       │     f     │     o     │     u     │    "'"    │ del  │
+//    ├────────────┼───────────┼───────────┼───────────┼───────────┼───────────────┤                                       ├───────────────┼───────────┼───────────┼───────────┼───────────┼──────┤
+//    │  RALT(`)   │ LALT_T(c) │ LGUI_T(r) │ LCTL_T(s) │ LSFT_T(t) │       g       │                                       │       m       │ LSFT_T(n) │ LCTL_T(e) │ LGUI_T(i) │ LALT_T(a) │ bspc │
+//    ├────────────┼───────────┼───────────┼───────────┼───────────┼───────────────┤                                       ├───────────────┼───────────┼───────────┼───────────┼───────────┼──────┤
+//    │    ___     │     q     │     j     │     v     │     d     │       k       │                                       │       x       │     h     │     ,     │     .     │     ?     │ ___  │
+//    └────────────┴───────────┴───────────┴───────────┼───────────┼───────────────┼───────────────┐       ┌───────────────┼───────────────┼───────────┼───────────┴───────────┴───────────┴──────┘
+//                                                     │   ralt    │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ LT(_NUM, tab) │ LT(_SYM, ent) │    esc    │
+//                                                     └───────────┴───────────────┴───────────────┘       └───────────────┴───────────────┴───────────┘
 [_COLEMAK] = LAYOUT_split_3x6_3(
-  RALT(US_6)     , KC_Q         , KC_W         , KC_F         , KC_P          , KC_B             ,                                            KC_J               , KC_L         , KC_U         , KC_Y         , KC_QUOTE     , ___    ,
-  RALT(KC_GRAVE) , LALT_T(KC_A) , LGUI_T(KC_R) , LCTL_T(KC_S) , LSFT_T(KC_T)  , KC_G             ,                                            KC_M               , LSFT_T(KC_N) , LCTL_T(KC_E) , LGUI_T(KC_I) , LALT_T(KC_O) , KC_BSPC,
-  ___            , KC_Z         , KC_X         , KC_C         , KC_D          , KC_V             ,                                            KC_K               , KC_H         , KC_COMM      , KC_DOT       , KC_QUESTION  , ___    ,
-                                                                OSM(MOD_RALT) , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
+  RALT(US_6)     , KC_W         , KC_L         , KC_Y         , KC_P         , KC_B             ,                                            KC_Z               , KC_F         , KC_O         , KC_U         , KC_QUOTE     , KC_DEL ,
+  RALT(KC_GRAVE) , LALT_T(KC_C) , LGUI_T(KC_R) , LCTL_T(KC_S) , LSFT_T(KC_T) , KC_G             ,                                            KC_M               , LSFT_T(KC_N) , LCTL_T(KC_E) , LGUI_T(KC_I) , LALT_T(KC_A) , KC_BSPC,
+  ___            , KC_Q         , KC_J         , KC_V         , KC_D         , KC_K             ,                                            KC_X               , KC_H         , KC_COMM      , KC_DOT       , KC_QUESTION  , ___    ,
+                                                                KC_RALT      , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
 ),
 
 //    ┌─────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┐                                       ┌───────────────┬──────┬──────┬─────┬──────┬─────┐
 //    │ ___ │      ___      │      ___      │      ___      │      ___      │      ___      │                                       │      ___      │ ___  │ ___  │ ___ │ ___  │ ___ │
 //    ├─────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤                                       ├───────────────┼──────┼──────┼─────┼──────┼─────┤
-//    │ ___ │ OSM(MOD_LALT) │ OSM(MOD_LGUI) │ OSM(MOD_LCTL) │ OSM(MOD_LSFT) │      ___      │                                       │      ___      │ left │ down │ up  │ rght │ ___ │
+//    │ ___ │ OSM(MOD_LALT) │ OSM(MOD_LGUI) │ OSM(MOD_LCTL) │ OSM(MOD_LSFT) │     pgup      │                                       │     home      │ left │ down │ up  │ rght │ ___ │
 //    ├─────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤                                       ├───────────────┼──────┼──────┼─────┼──────┼─────┤
-//    │ ___ │      ___      │      ___      │   C(S(tab))   │    C(tab)     │      ___      │                                       │      ___      │  h   │  j   │  k  │  l   │ ___ │
+//    │ ___ │      ___      │      ___      │   C(S(tab))   │    C(tab)     │     pgdn      │                                       │      end      │  h   │  j   │  k  │  l   │ ___ │
 //    └─────┴───────────────┴───────────────┴───────────────┼───────────────┼───────────────┼───────────────┐       ┌───────────────┼───────────────┼──────┼──────┴─────┴──────┴─────┘
-//                                                          │ OSM(MOD_RALT) │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ LT(_NUM, tab) │ LT(_SYM, ent) │ esc  │
+//                                                          │     ralt      │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ LT(_NUM, tab) │ LT(_SYM, ent) │ esc  │
 //                                                          └───────────────┴───────────────┴───────────────┘       └───────────────┴───────────────┴──────┘
 [_NAV] = LAYOUT_split_3x6_3(
   ___ , ___           , ___           , ___           , ___           , ___              ,                                            ___                , ___     , ___     , ___   , ___      , ___,
-  ___ , OSM(MOD_LALT) , OSM(MOD_LGUI) , OSM(MOD_LCTL) , OSM(MOD_LSFT) , ___              ,                                            ___                , KC_LEFT , KC_DOWN , KC_UP , KC_RIGHT , ___,
-  ___ , ___           , ___           , C(S(KC_TAB))  , C(KC_TAB)     , ___              ,                                            ___                , KC_H    , KC_J    , KC_K  , KC_L     , ___,
-                                                        OSM(MOD_RALT) , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
+  ___ , OSM(MOD_LALT) , OSM(MOD_LGUI) , OSM(MOD_LCTL) , OSM(MOD_LSFT) , KC_PGUP          ,                                            KC_HOME            , KC_LEFT , KC_DOWN , KC_UP , KC_RIGHT , ___,
+  ___ , ___           , ___           , C(S(KC_TAB))  , C(KC_TAB)     , KC_PGDN          ,                                            KC_END             , KC_H    , KC_J    , KC_K  , KC_L     , ___,
+                                                        KC_RALT       , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
 ),
 
-//    ┌─────┬─────┬───┬───┬───────────────┬───────────────┐                                       ┌───────────────┬──────┬──────┬──────┬──────┬─────┐
-//    │ ___ │ ___ │ 7 │ 8 │       9       │      ___      │                                       │      ___      │ ___  │ ___  │ ___  │ ___  │ ___ │
-//    ├─────┼─────┼───┼───┼───────────────┼───────────────┤                                       ├───────────────┼──────┼──────┼──────┼──────┼─────┤
-//    │ ___ │ ___ │ 1 │ 2 │       3       │       0       │                                       │      ___      │ lsft │ lctl │ lgui │ lalt │ ___ │
-//    ├─────┼─────┼───┼───┼───────────────┼───────────────┤                                       ├───────────────┼──────┼──────┼──────┼──────┼─────┤
-//    │ ___ │ ___ │ 4 │ 5 │       6       │      ___      │                                       │      ___      │  +   │  ,   │  .   │  -   │ ___ │
-//    └─────┴─────┴───┴───┼───────────────┼───────────────┼───────────────┐       ┌───────────────┼───────────────┼──────┼──────┴──────┴──────┴─────┘
-//                        │ OSM(MOD_RALT) │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ LT(_NUM, tab) │ LT(_SYM, ent) │ esc  │
-//                        └───────────────┴───────────────┴───────────────┘       └───────────────┴───────────────┴──────┘
+//    ┌─────┬─────┬───┬───┬──────┬───────────────┐                                       ┌───────────────┬──────┬──────┬──────┬──────┬─────┐
+//    │ ___ │ ___ │ 7 │ 8 │  9   │      ___      │                                       │      ___      │ ___  │ ___  │ ___  │ ___  │ ___ │
+//    ├─────┼─────┼───┼───┼──────┼───────────────┤                                       ├───────────────┼──────┼──────┼──────┼──────┼─────┤
+//    │ ___ │ ___ │ 1 │ 2 │  3   │       0       │                                       │      ___      │ lsft │ lctl │ lgui │ lalt │ ___ │
+//    ├─────┼─────┼───┼───┼──────┼───────────────┤                                       ├───────────────┼──────┼──────┼──────┼──────┼─────┤
+//    │ ___ │ ___ │ 4 │ 5 │  6   │      ___      │                                       │      ___      │  +   │  ,   │  .   │  -   │ ___ │
+//    └─────┴─────┴───┴───┼──────┼───────────────┼───────────────┐       ┌───────────────┼───────────────┼──────┼──────┴──────┴──────┴─────┘
+//                        │ ralt │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ LT(_NUM, tab) │ LT(_SYM, ent) │ esc  │
+//                        └──────┴───────────────┴───────────────┘       └───────────────┴───────────────┴──────┘
 [_NUM] = LAYOUT_split_3x6_3(
-  ___ , ___ , KC_7 , KC_8 , KC_9          , ___              ,                                            ___                , ___     , ___      , ___     , ___      , ___,
-  ___ , ___ , KC_1 , KC_2 , KC_3          , KC_0             ,                                            ___                , KC_LSFT , KC_LCTL  , KC_LGUI , KC_LALT  , ___,
-  ___ , ___ , KC_4 , KC_5 , KC_6          , ___              ,                                            ___                , KC_PLUS , KC_COMMA , KC_DOT  , KC_MINUS , ___,
-                            OSM(MOD_RALT) , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
+  ___ , ___ , KC_7 , KC_8 , KC_9    , ___              ,                                            ___                , ___     , ___      , ___     , ___      , ___,
+  ___ , ___ , KC_1 , KC_2 , KC_3    , KC_0             ,                                            ___                , KC_LSFT , KC_LCTL  , KC_LGUI , KC_LALT  , ___,
+  ___ , ___ , KC_4 , KC_5 , KC_6    , ___              ,                                            ___                , KC_PLUS , KC_COMMA , KC_DOT  , KC_MINUS , ___,
+                            KC_RALT , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
 ),
 
-//    ┌───────────┬──────┬───┬───┬───────────────┬───────────────┐                                       ┌───────────────┬──────┬──────┬──────┬──────┬─────┐
-//    │    ___    │  @   │ & │ ^ │       $       │       +       │                                       │      ___      │ ___  │ ___  │ ___  │ ___  │ ___ │
-//    ├───────────┼──────┼───┼───┼───────────────┼───────────────┤                                       ├───────────────┼──────┼──────┼──────┼──────┼─────┤
-//    │ bACKSLASH │  ~   │ / │ _ │       =       │       -       │                                       │      ___      │ lsft │ lctl │ lgui │ lalt │ ___ │
-//    ├───────────┼──────┼───┼───┼───────────────┼───────────────┤                                       ├───────────────┼──────┼──────┼──────┼──────┼─────┤
-//    │    ___    │ '--' │ | │ ~ │       %       │       *       │                                       │      ___      │ ___  │ ___  │ ___  │ ___  │ ___ │
-//    └───────────┴──────┴───┴───┼───────────────┼───────────────┼───────────────┐       ┌───────────────┼───────────────┼──────┼──────┴──────┴──────┴─────┘
-//                               │ OSM(MOD_RALT) │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ LT(_NUM, tab) │ LT(_SYM, ent) │ esc  │
-//                               └───────────────┴───────────────┴───────────────┘       └───────────────┴───────────────┴──────┘
+//    ┌───────────┬──────┬───┬───┬──────┬───────────────┐                                       ┌───────────────┬──────┬──────┬──────┬──────┬─────┐
+//    │     +     │  @   │ & │ ^ │  $   │       `       │                                       │      ___      │ ___  │ ___  │ ___  │ ___  │ ___ │
+//    ├───────────┼──────┼───┼───┼──────┼───────────────┤                                       ├───────────────┼──────┼──────┼──────┼──────┼─────┤
+//    │ bACKSLASH │  ~   │ / │ _ │  =   │       -       │                                       │      ___      │ lsft │ lctl │ lgui │ lalt │ ___ │
+//    ├───────────┼──────┼───┼───┼──────┼───────────────┤                                       ├───────────────┼──────┼──────┼──────┼──────┼─────┤
+//    │    ___    │ '--' │ | │ ~ │  %   │       *       │                                       │      ___      │ ___  │ ___  │ ___  │ ___  │ ___ │
+//    └───────────┴──────┴───┴───┼──────┼───────────────┼───────────────┐       ┌───────────────┼───────────────┼──────┼──────┴──────┴──────┴─────┘
+//                               │ ralt │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ LT(_NUM, tab) │ LT(_SYM, ent) │ esc  │
+//                               └──────┴───────────────┴───────────────┘       └───────────────┴───────────────┴──────┘
 [_SYM] = LAYOUT_split_3x6_3(
-  ___          , KC_AT    , KC_AMPERSAND , KC_CIRC       , KC_DOLLAR     , KC_PLUS          ,                                            ___                , ___     , ___     , ___     , ___     , ___,
-  KC_BACKSLASH , KC_TILDE , KC_SLASH     , KC_UNDERSCORE , KC_EQUAL      , KC_MINUS         ,                                            ___                , KC_LSFT , KC_LCTL , KC_LGUI , KC_LALT , ___,
-  ___          , KC_HASH  , KC_PIPE      , KC_TILDE      , KC_PERCENT    , KC_ASTERISK      ,                                            ___                , ___     , ___     , ___     , ___     , ___,
-                                                           OSM(MOD_RALT) , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
+  KC_PLUS      , KC_AT    , KC_AMPERSAND , KC_CIRC       , KC_DOLLAR  , KC_GRAVE         ,                                            ___                , ___     , ___     , ___     , ___     , ___,
+  KC_BACKSLASH , KC_TILDE , KC_SLASH     , KC_UNDERSCORE , KC_EQUAL   , KC_MINUS         ,                                            ___                , KC_LSFT , KC_LCTL , KC_LGUI , KC_LALT , ___,
+  ___          , KC_HASH  , KC_PIPE      , KC_TILDE      , KC_PERCENT , KC_ASTERISK      ,                                            ___                , ___     , ___     , ___     , ___     , ___,
+                                                           KC_RALT    , LT(_NAV, KC_SPC) , OSM(MOD_LSFT) ,         LT(_NUM, KC_TAB) , LT(_SYM, KC_ENTER) , KC_ESC
 )
 };
 
@@ -108,7 +116,8 @@ enum combos {
     XC_LSQUARE_BRACKET,
     CD_RSQUARE_BRACKET,
     // right combos but not next to each other
-    // NI_E_AIGUE,
+    NI_E_AIGUE,
+    RT_A_GRAVE,
     // XD_C_CEDILLE,
 
 
@@ -145,10 +154,13 @@ const uint16_t PROGMEM commadot_rangle_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 // const uint16_t PROGMEM nh_minus_combo[] = {LSFT_T(KC_N), KC_H, COMBO_END};
 // const uint16_t PROGMEM ecomma_slash_combo[] = {LCTL_T(KC_E), KC_COMM, COMBO_END};
 // const uint16_t PROGMEM idot_pipe_combo[] = {LGUI_T(KC_I), KC_DOT, COMBO_END};
-const uint16_t PROGMEM xc_lsquare_bracket_combo[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM cd_rsquare_bracket_combo[] = {KC_C, KC_D, COMBO_END};
+// const uint16_t PROGMEM xc_lsquare_bracket_combo[] = {KC_X, KC_C, COMBO_END};
+// const uint16_t PROGMEM cd_rsquare_bracket_combo[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM xc_lsquare_bracket_combo[] = {KC_J, KC_V, COMBO_END};
+const uint16_t PROGMEM cd_rsquare_bracket_combo[] = {KC_V, KC_D, COMBO_END};
 const uint16_t PROGMEM tn_caps_word_combo[] = {LSFT_T(KC_T), LSFT_T(KC_N), COMBO_END};
-// const uint16_t PROGMEM ni_e_aigue_combo[] = {LSFT_T(KC_N), LGUI_T(KC_I), COMBO_END};
+const uint16_t PROGMEM ni_e_aigue_combo[] = {LSFT_T(KC_N), LGUI_T(KC_I), COMBO_END};
+const uint16_t PROGMEM rt_a_grave_combo[] = {LGUI_T(KC_R), LSFT_T(KC_T), COMBO_END};
 // const uint16_t PROGMEM xd_c_cedille_combo[] = {KC_X, KC_D, COMBO_END};
 
 combo_t key_combos[] = {
@@ -177,23 +189,54 @@ combo_t key_combos[] = {
     [XC_LSQUARE_BRACKET] = COMBO(xc_lsquare_bracket_combo, KC_LBRC),
     [CD_RSQUARE_BRACKET] = COMBO(cd_rsquare_bracket_combo, KC_RBRC),
     [TN_CAPS_WORD] = COMBO(tn_caps_word_combo, QK_CAPS_WORD_TOGGLE),
-    // [NI_E_AIGUE] = COMBO(ni_e_aigue_combo, RALT(KC_E)),
+    [NI_E_AIGUE] = COMBO(ni_e_aigue_combo, RALT(KC_E)),
+    [RT_A_GRAVE] = COMBO_ACTION(rt_a_grave_combo)
     // [XD_C_CEDILLE] = COMBO(xd_c_cedille_combo, RALT(KC_COMMA)),
 };
 
-const custom_shift_key_t custom_shift_keys[] = {
-    {KC_QUESTION, KC_EXCLAIM},
-    {KC_COMMA, KC_SEMICOLON},
-    {KC_DOT, KC_COLON},
-    // {KC_LPRN, KC_LABK},
-    // {KC_RPRN, KC_RABK},
+// const custom_shift_key_t custom_shift_keys[] = {
+//     {KC_QUESTION, KC_EXCLAIM},
+//     {KC_COMMA, KC_SEMICOLON},
+//     {KC_DOT, KC_COLON},
+//     // {KC_LPRN, KC_LABK},
+//     // {KC_RPRN, KC_RABK},
+//
+// };
+// uint8_t NUM_CUSTOM_SHIFT_KEYS =
+//     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
+const key_override_t dot_key_override =
+    ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);  // Shift . is ?
+const key_override_t comm_key_override =
+    ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_SEMICOLON); // Shift , is !
+const key_override_t shifted_comm_key_override =
+    ko_make_basic(MOD_MASK_SA, KC_COMM, RALT(LSFT(KC_COMM)));
+const key_override_t question_key_override =
+    ko_make_basic(MOD_MASK_SHIFT, KC_QUESTION, KC_EXCLAIM); // Shift : is ;
+
+const key_override_t** key_overrides = (const key_override_t*[]){
+    &shifted_comm_key_override,
+    &dot_key_override,
+    &comm_key_override,
+    &question_key_override,
+    NULL
 };
-uint8_t NUM_CUSTOM_SHIFT_KEYS =
-    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
-
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-  if (!process_custom_shift_keys(keycode, record)) { return false; }
+  // switch (keycode) {
+  //     case KC_RALT
+  // }
+  // if (!process_custom_shift_keys(keycode, record)) { return false; }
   return true;
+}
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case RT_A_GRAVE:
+      if (pressed) {
+        tap_code16(RALT(KC_GRAVE));
+        tap_code16(KC_A);
+      }
+      break;
+  }
 }
