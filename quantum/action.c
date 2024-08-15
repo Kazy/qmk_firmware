@@ -538,8 +538,17 @@ static void bilateral_combinations_tap(keyevent_t event) {
         else {
             threshold += BILATERAL_COMBINATIONS_ALLOW_CROSSOVER_AFTER;
         }
+            #ifdef BILATERAL_COMBINATIONS_IGNORE_ROW
+            if (bilateral_combinations.key.row == BILATERAL_COMBINATIONS_IGNORE_ROW) {
+                threshold  = 0;
+            }
+            #endif
 
-        if (threshold > 0) {
+        if (threshold > 0
+            #ifdef BILATERAL_COMBINATIONS_IGNORE_ROW
+                || bilateral_combinations.key.row == BILATERAL_COMBINATIONS_IGNORE_ROW
+            #endif
+            ) {
             if ((bilateral_combinations.chord_mods & BILATERAL_COMBINATIONS_DELAY_MODS_THAT_MATCH)
                 && bilateral_combinations.chord_mods == bilateral_combinations.mods)
             {
