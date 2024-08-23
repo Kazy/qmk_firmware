@@ -177,7 +177,7 @@ const uint16_t PROGMEM a_grave_combo[] = {LGUI_T(KC_S), LSFT_T(KC_T), COMBO_END}
 const uint16_t PROGMEM e_grave_combo[] = {KC_U, KC_Y, COMBO_END};
 // const uint16_t PROGMEM xd_c_cedille_combo[] = {KC_X, KC_D, COMBO_END};
 const uint16_t PROGMEM q_combo[] = {KC_G, KC_P, COMBO_END};
-const uint16_t PROGMEM z_combo[] = {KC_J, KC_G, COMBO_END};
+// const uint16_t PROGMEM z_combo[] = {KC_J, KC_G, COMBO_END};
 const uint16_t PROGMEM z_combo_2[] = {KC_G, KC_M, COMBO_END};
 
 combo_t key_combos[] = {
@@ -206,8 +206,8 @@ combo_t key_combos[] = {
     [LSQUARE_BRACKET] = COMBO(lsquare_bracket_combo, KC_LBRC),
     [RSQUARE_BRACKET] = COMBO(rsquare_bracket_combo, KC_RBRC),
     [Q] = COMBO_ACTION(q_combo),
-    [Z] = COMBO(z_combo, KC_Z),
-    [Z] = COMBO(z_combo_2, KC_Z),
+    // [Z] = COMBO(z_combo, KC_Z),
+    [Z] = COMBO_ACTION(z_combo_2),
     [CAPS_WORD] = COMBO(caps_word_combo, QK_CAPS_WORD_TOGGLE),
     [E_AIGUE] = COMBO(e_aigue_combo, RALT(KC_E)),
     [A_GRAVE] = COMBO_ACTION(a_grave_combo),
@@ -298,6 +298,10 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             tap_code16(KC_Q); //
             unregister_mods(MOD_MASK_SHIFT);  //
             tap_code16(KC_U); //
+            combo_on = combo_index; // if held, delete the 'u' in matrix_scan_user_process_combo
+            break;
+        case Z: //
+            tap_code16(KC_Z); //
             combo_on = combo_index; // if held, delete the 'u' in matrix_scan_user_process_combo
             break;
       }
