@@ -7,3 +7,4 @@ KEY_OVERRIDE_ENABLE = yes
 
 SRC += features/caps_word.c
 SRC += features/custom_shift_key.c
+SRC += features/adaptive.c

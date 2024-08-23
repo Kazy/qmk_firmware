@@ -3,7 +3,6 @@
 
 #pragma once
 
-
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
 
@@ -23,18 +22,26 @@
 
 // #define COMBO_STRICT_TIMER
 #define COMBO_TERM 35
+#define COMBO_HOLD (TAPPING_TERM) // time to hold to trigger delayed combo
+
+#define LINGER_TIME TAPPING_TERM * 1.2 // how long to hold before a time-depentant behavior begins
 
 /* Miryoku */
 #define BILATERAL_COMBINATIONS
 #define BILATERAL_COMBINATIONS_LIMIT_CHORD_TO_N_KEYS 4 /* GUI, Alt, Ctrl, Shift */
 #define BILATERAL_COMBINATIONS_DELAY_MODS_THAT_MATCH MOD_MASK_ALT
-#define BILATERAL_COMBINATIONS_DELAY_MATCHED_MODS_BY 100  /* ms */
-#define BILATERAL_COMBINATIONS_ALLOW_CROSSOVER_AFTER 50   /* ms */
+#define BILATERAL_COMBINATIONS_DELAY_MATCHED_MODS_BY 100 /* ms */
+#define BILATERAL_COMBINATIONS_ALLOW_CROSSOVER_AFTER 50  /* ms */
 // was 3000 before
 #define BILATERAL_COMBINATIONS_ALLOW_SAMESIDED_AFTER 3000 /* ms */
-#define BILATERAL_COMBINATIONS_TYPING_STREAK_TIMEOUT 75  /* ms */
+#define BILATERAL_COMBINATIONS_TYPING_STREAK_TIMEOUT 75   /* ms */
 #define BILATERAL_COMBINATIONS_TYPING_STREAK_MODMASK (~MOD_MASK_SHIFT)
+#define BILATERAL_COMBINATIONS_IGNORE_ROW 3
 
+#define ADAPTIVE_ENABLE
+#define ADAPTIVE_TERM (TAPPING_TERM / 2) // rolling threshold
+#define ADAPT_VOWEL_H                    // eliminate vowel SFBs (AU/UA;EO/OE) using vH instead of v'
+// #define FR_ADAPTIVES                     // eliminate 'h SFB for French
 
 // #define UNICODE_KEY_LNX KC_RALT
 
