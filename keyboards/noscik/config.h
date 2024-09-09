@@ -39,7 +39,7 @@
 #define BILATERAL_COMBINATIONS_IGNORE_ROW 3
 
 #define ADAPTIVE_ENABLE
-#define ADAPTIVE_TERM (TAPPING_TERM / 2) // rolling threshold
+#define ADAPTIVE_TERM  90 // rolling threshold
 #define ADAPT_VOWEL_H                    // eliminate vowel SFBs (AU/UA;EO/OE) using vH instead of v'
 // #define FR_ADAPTIVES                     // eliminate 'h SFB for French
 

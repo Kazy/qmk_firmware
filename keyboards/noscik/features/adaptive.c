@@ -14,13 +14,15 @@
  * Check https://norvig.com/mayzner.html to see which bigram to prioritize
  * Enabled:
  * - GJ: GTH
+ * - JG: GHT
  * - MV: MN
  * - GM: GL
  * - MG: LG
  * - JM: LM
+ * - PM: PL
  * - TN: TION
  * - PN: PT
- * - GP: PL
+ * - XF: XC
  * - AH: AU
  * - UH: UA
  * - IH: IY
@@ -118,6 +120,11 @@ bool process_adaptive_key_inner(uint16_t keycode, const keyrecord_t *record) {
                     tap_code(KC_BSPC);
                     tap_code(KC_L);
                     break; // and let current keycode send normally
+                case KC_J: // "GHT" is an awkward trigram/skipgram
+                    tap_code(KC_BSPC);
+                    send_string("ght"); // for "height"
+                    return_state = false; // done.
+                    break;
                 // case KC_J: // JG = jpg
                 //     tap_code(KC_P); // insert a P
                 //     break; // and let current keycode send normally
@@ -153,6 +160,16 @@ bool process_adaptive_key_inner(uint16_t keycode, const keyrecord_t *record) {
         //     }
         //     break;
 
+        case KC_F:
+            switch (prior_keycode) {
+                case KC_X:
+                    tap_code(KC_C);
+                    // xfl becomes xcl, so exclude rolls quite well
+                    return_state = false; // done.
+                    break;
+            }
+            break;
+
         case KC_M: // M becomes L (pull up "L" to same row)
             switch (prior_keycode) {
                 case KC_G: // pull up "L" (GL is 5x more common than GM)
@@ -161,6 +178,10 @@ bool process_adaptive_key_inner(uint16_t keycode, const keyrecord_t *record) {
                     return_state = false; // done.
                     break;
                 case KC_J: // WM = LM (LM 20x more common)
+                    tap_code(KC_L);
+                    return_state = false; // done.
+                    break;
+                case KC_P:
                     tap_code(KC_L);
                     return_state = false; // done.
                     break;
@@ -181,7 +202,7 @@ bool process_adaptive_key_inner(uint16_t keycode, const keyrecord_t *record) {
                     send_string("ion");
                     return_state = false; // done.
                     break;
-                case KC_P: // "TION" is 58x more common than "TN"
+                case KC_P:
                     tap_code(KC_T);
                     return_state = false; // done.
                     break;
