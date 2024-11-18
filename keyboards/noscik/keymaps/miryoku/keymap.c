@@ -20,18 +20,18 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //    ┌────────────┬───────────┬───────────┬───────────┬───────────┬───────────────┐                           ┌───────────────┬───────────────┬───────────┬───────────┬───────────┬──────────────┐
-//    │ RALT(US_6) │     j     │     g     │     m     │     p     │       b       │                           │       "       │       .       │     /     │     q     │     k     │     del      │
+//    │ RALT(US_6) │     j     │     g     │     m     │     p     │       b       │                           │       "       │       .       │     q     │     '     │     k     │     del      │
 //    ├────────────┼───────────┼───────────┼───────────┼───────────┼───────────────┤                           ├───────────────┼───────────────┼───────────┼───────────┼───────────┼──────────────┤
 //    │    tab     │ LALT_T(c) │ LGUI_T(s) │ LCTL_T(n) │ LSFT_T(t) │       w       │                           │       ,       │   LSFT_T(a)   │ LCTL_T(e) │ LGUI_T(i) │ LALT_T(h) │     bspc     │
 //    ├────────────┼───────────┼───────────┼───────────┼───────────┼───────────────┤                           ├───────────────┼───────────────┼───────────┼───────────┼───────────┼──────────────┤
-//    │  RALT(`)   │     x     │     f     │     l     │     d     │       v       │                           │       -       │       u       │     o     │     y     │     '     │ DF(_COLEMAK) │
+//    │  RALT(`)   │     x     │     f     │     l     │     d     │       v       │                           │       /       │       u       │     o     │     y     │     -     │ DF(_COLEMAK) │
 //    └────────────┴───────────┴───────────┴───────────┼───────────┼───────────────┼───────────────┐       ┌───┼───────────────┼───────────────┼───────────┴───────────┴───────────┴──────────────┘
 //                                                     │   ralt    │ LT(_NAV, spc) │ OSM(MOD_LSFT) │       │ r │ LT(_SYM, ent) │ LT(_NUM, esc) │
 //                                                     └───────────┴───────────────┴───────────────┘       └───┴───────────────┴───────────────┘
 [_VIB_P] = LAYOUT_split_3x6_3(
-  RALT(US_6)     , KC_J         , KC_G         , KC_M         , KC_P         , KC_B               ,                                KC_DQUO            , KC_DOT           , KC_SLASH     , KC_Q         , KC_K         , KC_DEL      ,
+  RALT(US_6)     , KC_J         , KC_G         , KC_M         , KC_P         , KC_B               ,                                KC_DQUO            , KC_DOT           , KC_Q         , KC_QUOTE     , KC_K         , KC_DEL      ,
   KC_TAB         , LALT_T(KC_C) , LGUI_T(KC_S) , LCTL_T(KC_N) , LSFT_T(KC_T) , KC_W               ,                                KC_COMMA           , LSFT_T(KC_A)     , LCTL_T(KC_E) , LGUI_T(KC_I) , LALT_T(KC_H) , KC_BSPC     ,
-  RALT(KC_GRAVE) , KC_X         , KC_F         , KC_L         , KC_D         , KC_V               ,                                KC_MINUS           , KC_U             , KC_O         , KC_Y         , KC_QUOTE     , DF(_COLEMAK),
+  RALT(KC_GRAVE) , KC_X         , KC_F         , KC_L         , KC_D         , KC_V               ,                                KC_SLASH           , KC_U             , KC_O         , KC_Y         , KC_MINUS     , DF(_COLEMAK),
                                                                 KC_RALT      , LT(_NAV, KC_SPACE) , OSM(MOD_LSFT) ,         KC_R , LT(_SYM, KC_ENTER) , LT(_NUM, KC_ESC)
 ),
 
